@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:background="@color/activityBackground"
+    android:longClickable="true"
+    android:clickable="true">
+
+    <!--<ImageView-->
+        <!--android:id="@+id/tag_icon"-->
+        <!--android:layout_width="24dp"-->
+        <!--android:layout_height="24dp"-->
+        <!--android:layout_alignParentStart="true"-->
+        <!--android:layout_alignTop="@+id/date"-->
+        <!--android:layout_marginStart="10dp"-->
+        <!--android:layout_marginTop="7dp"-->
+        <!--android:src="@drawable/ic_payment_blue_24pd"/>-->
+
+    <TextView
+        android:id="@+id/name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Name"
+        android:textColor="@color/text"
+        android:textSize="17sp"
+        android:layout_below="@+id/date"
+        android:layout_marginStart="10dp"
+        android:layout_marginBottom="10dp"
+        android:layout_alignParentStart="true"/>
+
+    <TextView
+        android:id="@+id/value"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="value"
+        android:textColor="@color/text"
+        android:textSize="20sp"
+        android:layout_marginEnd="10dp"
+        android:layout_alignTop="@+id/date"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="7dp" />
+
+    <TextView
+        android:id="@+id/date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="mm/dd/yyyy"
+        android:textColor="@color/dateTextColor"
+        android:textSize="12sp"
+        android:layout_marginTop="10dp"
+        android:layout_alignStart="@+id/name" />
+
+    <TextView
+        android:id="@+id/dot"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toEndOf="@id/date"
+        android:layout_alignTop="@id/date"
+        android:layout_marginStart="2dp"
+        android:text="·"
+        android:textColor="@color/dateTextColor"
+        android:textSize="12sp"/>
+
+    <TextView
+        android:id="@+id/tag"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toEndOf="@id/dot"
+        android:layout_alignTop="@id/date"
+        android:layout_marginStart="2dp"
+        android:textSize="12sp"
+        android:textColor="@color/text"
+        android:text="Tag"/>
+
+</RelativeLayout>

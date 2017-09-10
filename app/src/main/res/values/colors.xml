@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!--<color name="colorPrimary">#43A047</color>-->
+    <!--<color name="colorPrimaryDark">#388E3C</color>-->
+    <color name="colorPrimary">#111111</color>
+    <color name="colorPrimaryDark">#000000</color>
+    <color name="colorAccent">#EF5350</color>
+    <color name="colorFAB">#EF5350</color>
+    <color name="activityBackground">#212121</color>
+    <color name="white">#FFFFFF</color>
+    <!--<color name="hint">#C8E6C9</color>-->
+    <color name="hint">#616161</color>
+    <color name="text">#FFFFFF</color>
+    <color name="dateTextColor">#B2BABB</color>
+
+    <!--Tag colors for matching with tag images-->
+    <!--<color name="billColor">#005ce0</color>-->
+    <!--<color name="foodColor">#ff9900</color>-->
+    <!--<color name="groceryColor">#43A047</color>-->
+    <!--<color name="entertainmentColor">#cc0000</color>-->
+    <!--<color name="gasColor">#ffcc00</color>-->
+    <color name="billColor">#42A5F5</color>
+    <color name="foodColor">#FFA726</color>
+    <color name="groceriesColor">#FF7043</color>
+    <color name="purchaseColor">#66BB6A</color>
+    <color name="entertainmentColor">#EF5350</color>
+    <color name="gasColor">#FFEE58</color>
+
+    <color name="inflowColor">#66BB6A</color>
+    <color name="outflowColor">#EF5350</color>
+
+</resources>

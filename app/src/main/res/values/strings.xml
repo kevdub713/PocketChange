@@ -1,0 +1,35 @@
+<resources>
+    <string name="app_name">Pocket Change</string>
+    <string name="name">Name</string>
+    <string name="amountHint">0</string>
+    <string name="pref_file_key">com.kevdub.MoneyTracker.mainValues</string>
+    <string name="title_activity_main2">Main2Activity</string>
+    <string name="action_settings">Settings</string>
+    <string name="section_format">Hello World from section: %1$d</string>
+    <string name="dollarSign">$</string>
+    <string name="total_amount">Total Amount</string>
+    <string name="date_hint">MM/DD/YYYY</string>
+    <string name="inflow">Inflow</string>
+    <string name="outflow">Outflow</string>
+    <string name="tag">Tag</string>
+    <string name="menu_edit">Edit</string>
+    <string name="menu_delete">Delete</string>
+
+    <!-- Dialog message when user is leaving editor but hasn't saved changes [CHAR LIMIT=NONE] -->
+    <string name="unsaved_changes_dialog_msg">Discard your changes and quit editing?</string>
+
+    <!-- Dialog button text for the option to discard a user's changes [CHAR LIMIT=20] -->
+    <string name="discard">Discard</string>
+
+    <!-- Dialog button text for the option to keep editing the current pet [CHAR LIMIT=20] -->
+    <string name="keep_editing">Keep Editing</string>
+
+    <!-- Dialog message to ask the user to confirm deleting the current pet [CHAR LIMIT=NONE] -->
+    <string name="delete_dialog_msg">Delete this pet?</string>
+
+    <!-- Dialog button text for the option to confirm deleting the current pet [CHAR LIMIT=20] -->
+    <string name="delete">Delete</string>
+
+    <!-- Dialog button text for the option to cancel deletion of the current pet [CHAR LIMIT=20] -->
+    <string name="cancel">Cancel</string>
+</resources>

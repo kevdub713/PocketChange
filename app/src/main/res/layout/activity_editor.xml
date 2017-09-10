@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context="com.example.kevdub.moneytracker.MainActivity"
+    android:background="@color/activityBackground"
+    >
+
+        <RelativeLayout
+            android:id="@+id/amount_card"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="20dp"
+            >
+
+            <TextView
+                android:id="@+id/$"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/dollarSign"
+                android:textColor="@color/text"
+                android:textSize="60sp"
+                android:layout_centerVertical="true"
+                />
+
+            <EditText
+                android:id="@+id/amount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/text"
+                android:textColorHint="@color/hint"
+                android:textSize="60sp"
+                android:hint="@string/amountHint"
+                android:backgroundTint="@color/activityBackground"
+                android:inputType="numberDecimal"
+                android:layout_toEndOf="@+id/$"
+                />
+
+        </RelativeLayout>
+
+    <RadioGroup
+        android:id="@+id/radio_group"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintStart_toStartOf="@+id/name"
+        app:layout_constraintEnd_toEndOf="@+id/name"
+        app:layout_constraintTop_toBottomOf="@+id/amount_card"
+        android:layout_marginTop="10dp">
+
+        <RadioButton
+            android:id="@+id/inflow_radio"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="10dp"
+            android:text="@string/inflow"
+            android:textSize="18sp"
+            android:textColor="@color/text"
+            android:buttonTint="@color/text"
+            android:onClick="onRadioButtonClicked"
+            />
+
+        <RadioButton
+            android:id="@+id/outflow_radio"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:text="@string/outflow"
+            android:textSize="18sp"
+            android:textColor="@color/text"
+            android:buttonTint="@color/text"
+            android:onClick="onRadioButtonClicked"
+            />
+
+    </RadioGroup>
+
+    <EditText
+        android:id="@+id/name"
+        android:layout_width="0dp"
+        android:layout_height="40dp"
+        android:hint="@string/name"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/radio_group"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="30dp"
+        android:layout_marginTop="5dp"
+        android:textColorHint="@color/hint"
+        android:textColor="@color/text"
+        android:textSize="18sp"
+        android:backgroundTint="@color/text"
+        android:inputType="textCapWords|textAutoCorrect"
+        tools:layout_editor_absoluteX="10dp" />
+
+    <EditText
+        android:id="@+id/date"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/name"
+        app:layout_constraintStart_toStartOf="@+id/name"
+        app:layout_constraintEnd_toEndOf="@+id/name"
+        android:layout_marginTop="5dp"
+        android:hint="@string/date_hint"
+        android:textColorHint="@color/hint"
+        android:textColor="@color/text"
+        android:backgroundTint="@color/text"
+        android:focusable="false"
+        android:longClickable="false"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="@+id/name"
+        app:layout_constraintTop_toTopOf="@+id/tag_spinner"
+        app:layout_constraintBottom_toBottomOf="@+id/tag_spinner"
+        android:text="@string/tag"
+        android:textSize="18sp"
+        android:textColor="@color/text"
+        android:paddingStart="3.5dp"
+        />
+
+    <Spinner
+        android:id="@+id/tag_spinner"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        app:layout_constraintEnd_toEndOf="@+id/name"
+        app:layout_constraintTop_toBottomOf="@+id/date"
+        android:layout_marginTop="5dp"
+        android:backgroundTint="@color/white"
+        />
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/log_fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:fabSize="normal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginBottom="@dimen/fab_margin"
+        android:layout_marginEnd="@dimen/fab_margin"
+        app:backgroundTint="@color/colorFAB"
+        android:src="@drawable/ic_done_white_24dp" />
+
+</android.support.constraint.ConstraintLayout>
