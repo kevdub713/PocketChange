@@ -61,14 +61,14 @@
         >
 
         <android.support.constraint.ConstraintLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="match_parent">
 
             <TextView
                 android:id="@+id/monthText"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="January 1970"
+                android:text="@string/month_placeholder"
                 android:textSize="18sp"
                 android:textColor="@color/dateTextColor"
                 card_view:layout_constraintTop_toTopOf="parent"
@@ -89,7 +89,7 @@
                 card_view:layout_constraintTop_toTopOf="@id/monthText"
                 card_view:layout_constraintBottom_toBottomOf="@id/monthText"
                 android:layout_marginEnd="10dp"
-                android:text="Change"
+                android:text="@string/month_change"
                 android:textSize="14sp"
                 android:textColor="@color/hint"
                 />
@@ -106,6 +106,19 @@
                 android:clipToPadding="false"
                 >
             </ListView>
+
+            <TextView
+                android:id="@+id/emptyView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                card_view:layout_constraintTop_toBottomOf="@id/monthText"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:text="@string/empty_list_text"
+                android:textSize="18sp"
+                android:textColor="@color/hint"
+                />
 
         </android.support.constraint.ConstraintLayout>
 

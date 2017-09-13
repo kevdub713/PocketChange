@@ -20,12 +20,13 @@
     <!--<color name="groceryColor">#43A047</color>-->
     <!--<color name="entertainmentColor">#cc0000</color>-->
     <!--<color name="gasColor">#ffcc00</color>-->
-    <color name="billColor">#42A5F5</color>
+    <color name="budgetColor">#64B5F6</color>
+    <color name="billColor">#B2DFDB</color>
     <color name="foodColor">#FFA726</color>
     <color name="groceriesColor">#FF7043</color>
     <color name="purchaseColor">#66BB6A</color>
     <color name="entertainmentColor">#EF5350</color>
-    <color name="gasColor">#FFEE58</color>
+    <color name="gasColor">#FFF176</color>
 
     <color name="inflowColor">#66BB6A</color>
     <color name="outflowColor">#EF5350</color>

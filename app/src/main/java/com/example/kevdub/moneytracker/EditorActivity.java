@@ -28,6 +28,7 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.example.kevdub.moneytracker.data.MoneyContract.MoneyEntry;
+import com.example.kevdub.moneytracker.data.MoneyProvider;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -37,6 +38,8 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.TreeMap;
 
+import layout.MonthDialogFragment;
+
 /**
  * Created by kevinwang on 5/22/17.
  */
@@ -45,19 +48,11 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
 
     public static final String MAIN_VALUES = "com.kevdub.MoneyTracker.mainValues";
 
-//    public static final String TOT_MONEY = "Total Assets";
-//    public static final String SPEND_MONEY = "Spending Money";
-//    public static final String SAVE_MONEY = "Saved";
-//    public static final String PERCENT_SAVE = "Percent to Save";
-
-    private static float totalMoney; // total amountEditText of money made this month
-    private static float spendingMoney; // amountEditText available to spend
-    private static float savingMoney; // amountEditText set aside for savings
-    private static float percentToSave = 0.20f; // percentage of total amountEditText to set aside in savings
     private static int flow;
 
     public static final String TAG_TRAVEL = "Travel";
     public static final String TAG_BILLS = "Bills";
+    public static final String TAG_BUDGET = "Budget";
     public static final String TAG_DINING = "Dining";
     public static final String TAG_ENTERTAINMENT = "Entertainment";
     public static final String TAG_GROCERIES = "Groceries";
@@ -66,11 +61,12 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
 
     private static final int POS_NONE = 0;
     private static final int POS_BILLS = 1;
-    private static final int POS_DINING = 2;
-    private static final int POS_ENTERTAINMENT = 3;
-    private static final int POS_GROCERIES = 4;
-    private static final int POS_PURCHASES = 5;
-    private static final int POS_TRAVEL = 6;
+    private static final int POS_BUDGET = 2;
+    private static final int POS_DINING = 3;
+    private static final int POS_ENTERTAINMENT = 4;
+    private static final int POS_GROCERIES = 5;
+    private static final int POS_PURCHASES = 6;
+    private static final int POS_TRAVEL = 7;
 
     private static Map<String, Integer> tagMap;
 
@@ -104,9 +100,7 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
             getSupportLoaderManager().initLoader(0, null, this);
         }
 
-
-
-        /** Default radio button toggled is Outflow */
+        // Default radio button toggled is Outflow
         inflowRadioButton = (RadioButton) findViewById(R.id.inflow_radio);
         outflowRadioButton = (RadioButton) findViewById(R.id.outflow_radio);
         outflowRadioButton.toggle();
@@ -132,6 +126,10 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
                 myCalendar.set(Calendar.MONTH, monthOfYear);
                 myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
                 updateLabel(); // sets dateEditText to the present date
+
+                if (!MonthDialogFragment.yearsLogged.contains(String.valueOf(year))) {
+                    MonthDialogFragment.yearsLogged.add(String.valueOf(year));
+                }
             }
         };
 
@@ -166,6 +164,7 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
         List<String> spinnerChoices = new ArrayList<>();
         spinnerChoices.add(TAG_NONE);
         spinnerChoices.add(TAG_BILLS);
+        spinnerChoices.add(TAG_BUDGET);
         spinnerChoices.add(TAG_DINING);
         spinnerChoices.add(TAG_ENTERTAINMENT);
         spinnerChoices.add(TAG_GROCERIES);
@@ -175,6 +174,7 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
         tagMap = new TreeMap<>();
         tagMap.put(TAG_NONE, POS_NONE);
         tagMap.put(TAG_BILLS, POS_BILLS);
+        tagMap.put(TAG_BUDGET, POS_BUDGET);
         tagMap.put(TAG_DINING, POS_DINING);
         tagMap.put(TAG_ENTERTAINMENT, POS_ENTERTAINMENT);
         tagMap.put(TAG_GROCERIES, POS_GROCERIES);

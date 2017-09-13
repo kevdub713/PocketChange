@@ -9,11 +9,17 @@
     <string name="dollarSign">$</string>
     <string name="total_amount">Total Amount</string>
     <string name="date_hint">MM/DD/YYYY</string>
-    <string name="inflow">Inflow</string>
-    <string name="outflow">Outflow</string>
+    <string name="inflow">Income</string>
+    <string name="outflow">Expense</string>
     <string name="tag">Tag</string>
     <string name="menu_edit">Edit</string>
     <string name="menu_delete">Delete</string>
+
+    <string name="month_change">Change</string>
+    <string name="empty_list_text">You have no entries for this month!</string>
+
+    <!-- PLACEHOLDER TEXT -->
+    <string name="month_placeholder">January 1970</string>
 
     <!-- Dialog message when user is leaving editor but hasn't saved changes [CHAR LIMIT=NONE] -->
     <string name="unsaved_changes_dialog_msg">Discard your changes and quit editing?</string>
@@ -25,7 +31,7 @@
     <string name="keep_editing">Keep Editing</string>
 
     <!-- Dialog message to ask the user to confirm deleting the current pet [CHAR LIMIT=NONE] -->
-    <string name="delete_dialog_msg">Delete this pet?</string>
+    <string name="delete_dialog_msg">Delete this entry?</string>
 
     <!-- Dialog button text for the option to confirm deleting the current pet [CHAR LIMIT=20] -->
     <string name="delete">Delete</string>

@@ -26,6 +26,7 @@ import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AlertDialog;
 import android.view.ContextMenu;
+import android.view.LayoutInflater;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.ViewGroup;
@@ -57,9 +58,9 @@ import layout.MonthDialogFragment;
 public class MainActivity extends FragmentActivity implements LoaderManager.LoaderCallbacks<Cursor>, MonthDialogFragment.MonthDialogListener {
 
     // class constants
-    public static final String TOT_MONEY = "Total";
+    public static final String TOT_MONEY = "Net Total";
     public static final String SPEND_MONEY = "Balance";
-    public static final String SAVE_MONEY = "Saved";
+    public static final String SAVE_MONEY = "Amount Saved";
     public static final String PERCENT_SAVE = "Percent to Save";
     private static final int MONEY_LOADER = 0;
 
@@ -105,42 +106,31 @@ public class MainActivity extends FragmentActivity implements LoaderManager.Load
         viewPager = (ViewPager) findViewById(R.id.pager);
         viewPager.setAdapter(new MyPagerAdapter(getSupportFragmentManager()));
 
+        // Tabs for ViewPager
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(viewPager);
 
-        cursorAdapter = new MoneyCursorAdapter(this, null);
+        // ListView setup
+        cursorAdapter = new MoneyCursorAdapter(this, null); // Custom cursor adapter for lv
         lv = (ListView) findViewById(R.id.log);
         lv.setAdapter(cursorAdapter);
+        lv.setEmptyView(findViewById(R.id.emptyView));
         registerForContextMenu(lv);
 
         lv.setOnScrollListener(new AbsListView.OnScrollListener() {
-            int lastFirstVisible;
-            boolean fabVisible = true;
 
             @Override
             public void onScrollStateChanged(AbsListView view, int scrollState) {
-//                final int currentFirstVisible = lv.getFirstVisiblePosition();
-//                if (scrollState == SCROLL_STATE_TOUCH_SCROLL) {
-//                    if (fabVisible && currentFirstVisible > lastFirstVisible) { // scroll down
-//                        fab.animate().cancel();
-//                        fab.animate().translationYBy(350);
-//                        fabVisible = false;
-//                    } else if (!fabVisible && currentFirstVisible < lastFirstVisible) { // scroll up
-//                        fab.animate().cancel();
-//                        fab.animate().translationYBy(-350);
-//                        fabVisible = true;
-//                    }
-//                }
-//                lastFirstVisible = currentFirstVisible;
+                int itemCount = lv.getCount();
                 int fabPositionY = fab.getScrollY();
-                if (scrollState == SCROLL_STATE_TOUCH_SCROLL || scrollState == SCROLL_STATE_FLING) {
-                    fab.animate().cancel();
-//                    fab.animate().translationYBy(250).setDuration(150);
-                    fab.hide();
-                } else {
-                    fab.animate().cancel();
-//                    fab.animate().translationY(fabPositionY).setDuration(150);
-                    fab.show();
+                if (itemCount > 10) {
+                    if (scrollState == SCROLL_STATE_TOUCH_SCROLL) {
+                        fab.animate().cancel();
+                        fab.animate().translationYBy(250).setDuration(200);
+                    } else {
+                        fab.animate().cancel();
+                        fab.animate().translationY(fabPositionY).setDuration(200);
+                    }
                 }
             }
 
@@ -150,7 +140,7 @@ public class MainActivity extends FragmentActivity implements LoaderManager.Load
             }
         });
 
-        // Setting up month Textview functionality
+        // Setting up month Textiew functionality
         java.text.SimpleDateFormat monthFormat = new java.text.SimpleDateFormat("MMMM", Locale.US);
         java.text.SimpleDateFormat monthNumFormat = new java.text.SimpleDateFormat("MM", Locale.US);
         java.text.SimpleDateFormat yearFormat = new java.text.SimpleDateFormat("yyyy", Locale.US);
@@ -314,9 +304,9 @@ public class MainActivity extends FragmentActivity implements LoaderManager.Load
                 case 0:
                     return "Balance";
                 case 1:
-                    return "Saved";
+                    return "Amount Saved";
                 case 2:
-                    return "Total";
+                    return "Net Total";
                 default:
                     return "no title";
             }

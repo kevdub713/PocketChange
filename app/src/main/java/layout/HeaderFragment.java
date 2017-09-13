@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.example.kevdub.moneytracker.EditorActivity;
 import com.example.kevdub.moneytracker.MainActivity;
 import com.example.kevdub.moneytracker.R;
 import com.example.kevdub.moneytracker.data.MoneyContract;
@@ -119,11 +120,13 @@ public class HeaderFragment extends Fragment {
     private int getNewValue(Context context) {
         int sumInflows = getSumInflows(context);
         int sumOutflows = getSumOutflows(context);
+        int amountBudgeted = getAmountBudgeted(context);
+        int amountSaved = Math.round((sumInflows - amountBudgeted) * MainActivity.sharedVals.getFloat(MainActivity.PERCENT_SAVE, 0));
         switch (name) {
             case MainActivity.SPEND_MONEY:
                 return sumInflows - Math.round(sumInflows * MainActivity.sharedVals.getFloat(MainActivity.PERCENT_SAVE, 0)) - sumOutflows;
             case MainActivity.SAVE_MONEY:
-                return Math.round(sumInflows * MainActivity.sharedVals.getFloat(MainActivity.PERCENT_SAVE, 0));
+                return amountSaved;
             case MainActivity.TOT_MONEY:
                 return sumInflows - sumOutflows;
             default:
@@ -133,10 +136,16 @@ public class HeaderFragment extends Fragment {
 
     private int getSumInflows(Context context) {
         String[] projection = {"SUM(" + MoneyContract.MoneyEntry.COLUMN_AMOUNT + ")"};
+
         // Select inflows for the appropriate month
-        String selection = MoneyContract.MoneyEntry.COLUMN_FLOW + "=? AND " + MoneyContract.MoneyEntry.COLUMN_DATE + " LIKE ?";
-        String[] selectionArgs = {String.valueOf(MoneyContract.MoneyEntry.INFLOW), MainActivity.monthNum + "/%/" + MainActivity.year};
-        Cursor cursor = context.getContentResolver().query(MoneyContract.MoneyEntry.CONTENT_URI,
+        String selection = MoneyContract.MoneyEntry.COLUMN_FLOW + "=? AND " +
+                MoneyContract.MoneyEntry.COLUMN_DATE + " LIKE ?";
+
+        String[] selectionArgs = {String.valueOf(MoneyContract.MoneyEntry.INFLOW),
+                MainActivity.monthNum + "/%/" + MainActivity.year};
+
+        Cursor cursor = context.getContentResolver().query(
+                MoneyContract.MoneyEntry.CONTENT_URI,
                 projection,
                 selection,
                 selectionArgs,
@@ -145,15 +154,21 @@ public class HeaderFragment extends Fragment {
         int sumInflows = 0;
         if (cursor.moveToFirst())
             sumInflows = cursor.getInt(cursor.getColumnIndexOrThrow(projection[0]));
+
         return sumInflows;
     }
 
     private int getSumOutflows(Context context) {
         String[] projection = {"SUM(" + MoneyContract.MoneyEntry.COLUMN_AMOUNT + ")"};
         // Select outflows for the appropriate month
-        String selection = MoneyContract.MoneyEntry.COLUMN_FLOW + "=? AND " + MoneyContract.MoneyEntry.COLUMN_DATE + " LIKE ?";
-        String[] selectionArgs = {String.valueOf(MoneyContract.MoneyEntry.OUTFLOW), MainActivity.monthNum + "/%/" + MainActivity.year};
-        Cursor cursor = context.getContentResolver().query(MoneyContract.MoneyEntry.CONTENT_URI,
+        String selection = MoneyContract.MoneyEntry.COLUMN_FLOW + "=? AND " +
+                MoneyContract.MoneyEntry.COLUMN_DATE + " LIKE ?";
+
+        String[] selectionArgs = {String.valueOf(MoneyContract.MoneyEntry.OUTFLOW),
+                MainActivity.monthNum + "/%/" + MainActivity.year};
+
+        Cursor cursor = context.getContentResolver().query(
+                MoneyContract.MoneyEntry.CONTENT_URI,
                 projection,
                 selection,
                 selectionArgs,
@@ -163,6 +178,24 @@ public class HeaderFragment extends Fragment {
         if (cursor.moveToFirst())
             sumOutflows = cursor.getInt(cursor.getColumnIndexOrThrow(projection[0]));
         return sumOutflows;
+    }
+
+    private int getAmountBudgeted(Context context) {
+        String[] projection = {"SUM(" + MoneyContract.MoneyEntry.COLUMN_AMOUNT + ")"};
+        String selection = MoneyContract.MoneyEntry.COLUMN_TAG + "=?";
+        String[] selectionArgs = {EditorActivity.TAG_BUDGET};
+
+        Cursor cursor = context.getContentResolver().query(
+                MoneyContract.MoneyEntry.CONTENT_URI,
+                projection,
+                selection,
+                selectionArgs,
+                null
+        );
+        int result = -1;
+        if (cursor.moveToFirst())
+            result = cursor.getInt(cursor.getColumnIndexOrThrow(projection[0]));
+        return result;
     }
 
     public class Radio extends BroadcastReceiver {
