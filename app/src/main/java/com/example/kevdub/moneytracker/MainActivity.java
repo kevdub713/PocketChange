@@ -235,7 +235,7 @@ public class MainActivity extends FragmentActivity implements LoaderManager.Load
                 MoneyContract.MoneyEntry.COLUMN_FLOW,
                 MoneyContract.MoneyEntry.COLUMN_DATE
         };
-        return new CursorLoader(this, MoneyEntry.CONTENT_URI, projection, selection, selectionArgs, MoneyContract.MoneyEntry.COLUMN_DATE + " ASC");
+        return new CursorLoader(this, MoneyEntry.CONTENT_URI, projection, selection, selectionArgs, MoneyContract.MoneyEntry.COLUMN_DATE + " DESC");
     }
 
     @Override
