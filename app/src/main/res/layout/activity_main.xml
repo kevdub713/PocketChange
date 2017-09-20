@@ -102,7 +102,7 @@
                 card_view:layout_constraintBottom_toBottomOf="parent"
                 android:layout_marginTop="0dp"
                 android:layout_marginBottom="0dp"
-                android:paddingBottom="73dp"
+                android:paddingBottom="72dp"
                 android:clipToPadding="false"
                 >
             </ListView>

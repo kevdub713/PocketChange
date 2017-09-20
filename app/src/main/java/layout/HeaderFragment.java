@@ -124,7 +124,7 @@ public class HeaderFragment extends Fragment {
         int amountSaved = Math.round((sumInflows - amountBudgeted) * MainActivity.sharedVals.getFloat(MainActivity.PERCENT_SAVE, 0));
         switch (name) {
             case MainActivity.SPEND_MONEY:
-                return sumInflows - amountSaved - sumOutflows;
+                return sumInflows - Math.round(sumInflows * MainActivity.sharedVals.getFloat(MainActivity.PERCENT_SAVE, 0)) - sumOutflows;
             case MainActivity.SAVE_MONEY:
                 return amountSaved;
             case MainActivity.TOT_MONEY:
