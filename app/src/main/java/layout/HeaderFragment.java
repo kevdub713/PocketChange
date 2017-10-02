@@ -124,7 +124,7 @@ public class HeaderFragment extends Fragment {
         int amountSaved = Math.round((sumInflows - amountBudgeted) * MainActivity.sharedVals.getFloat(MainActivity.PERCENT_SAVE, 0));
         switch (name) {
             case MainActivity.SPEND_MONEY:
-                return sumInflows - amountSaved - sumOutflows;
+                return (sumInflows - sumOutflows) - amountSaved;
             case MainActivity.SAVE_MONEY:
                 return amountSaved;
             case MainActivity.TOT_MONEY:
@@ -182,8 +182,11 @@ public class HeaderFragment extends Fragment {
 
     private int getAmountBudgeted(Context context) {
         String[] projection = {"SUM(" + MoneyContract.MoneyEntry.COLUMN_AMOUNT + ")"};
-        String selection = MoneyContract.MoneyEntry.COLUMN_TAG + "=?";
-        String[] selectionArgs = {EditorActivity.TAG_BUDGET};
+        String selection = MoneyContract.MoneyEntry.COLUMN_TAG + "=? AND " +
+                MoneyContract.MoneyEntry.COLUMN_DATE + " LIKE ?";
+
+        String[] selectionArgs = {EditorActivity.TAG_BUDGET,
+                MainActivity.monthNum + "/%/" + MainActivity.year};
 
         Cursor cursor = context.getContentResolver().query(
                 MoneyContract.MoneyEntry.CONTENT_URI,
@@ -192,7 +195,7 @@ public class HeaderFragment extends Fragment {
                 selectionArgs,
                 null
         );
-        int result = -1;
+        int result = 0;
         if (cursor.moveToFirst())
             result = cursor.getInt(cursor.getColumnIndexOrThrow(projection[0]));
         return result;
